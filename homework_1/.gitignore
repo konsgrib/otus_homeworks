@@ -3,12 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
 __pypackages__/
 
@@ -16,3 +10,5 @@ __pypackages__/
 .venv
 .venv/
 .vscode/
+
+*.txt
