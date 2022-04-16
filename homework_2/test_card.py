@@ -19,8 +19,15 @@ def test_dict_contains_tree_lists():
     assert len(field) == 3
 
 
-def test_each_list_of_dict_contains_five_digits():
+def test_each_list_of_dict_has_length_9():
     card = Card()
     field = card.generate_fields()
     for i in field:
         assert len(field[i]) == 9
+
+
+def test_each_list_of_dict_contains_five_digits():
+    card = Card()
+    field = card.generate_fields()
+    for i in field:
+        assert field[i].count("_") == 4
