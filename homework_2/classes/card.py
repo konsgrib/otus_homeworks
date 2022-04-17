@@ -1,4 +1,4 @@
-from random import randint, sample, choice
+from random import randint, sample
 
 
 class Card:
@@ -32,12 +32,25 @@ class Card:
         out += f"\n{footer}\n"
         return out
 
+    def replace_if_exists(self, value) -> bool:
+        for i in self.fields:
+            for x in range(len(self.fields[i])):
+                if self.fields[i][x] == value:
+                    self.fields[i][x] = "-"
+                    print(f"Bingo! number {value} exists!")
+                    return True
+        print(f"Woops! The number {value} does not exists!")
+        return False
+        # return any(value in val for val in self.fields.values())
+
     def __str__(self):
         return self._build_str()
 
 
 def main():
     card = Card("Vasily Pupkin")
+    print(card)
+    card.replace_if_exists(10)
     print(card)
 
 
