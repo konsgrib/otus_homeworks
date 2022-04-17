@@ -41,7 +41,6 @@ class Card:
                     return True
         print(f"Woops! The number {value} does not exists!")
         return False
-        # return any(value in val for val in self.fields.values())
 
     def __str__(self):
         return self._build_str()
