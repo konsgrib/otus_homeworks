@@ -1,5 +1,11 @@
+from itertools import count
+
+
 class Barrel:
+    _ids = count(0)
+
     def __init__(self):
+        self.id = next(self._ids)
         self._number = None
         self.used = False
 

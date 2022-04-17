@@ -1,5 +1,7 @@
+from unittest import mock
 from classes.card import Card
-from pytest import fixture
+from pytest import fixture, mark, param, raises
+from mock import patch, Mock
 
 
 @fixture
@@ -30,6 +32,16 @@ class TestCard:
         for i in field:
             assert field[i].count(" ") == 4
 
-    def test_replace_if_exists(self, card_instance):
-        res = card_instance.replace_if_exists(5)
-        assert isinstance(res, bool)
+
+@patch.object(Card, "generate_fields")
+def test_replace_if_exists(mock_generate_fields):
+    mock_generate_fields.return_value = {
+        0: ["_", 83, "_", "_", 5, 20, "_", 58, "_"],
+        1: ["_", 34, 87, "_", 79, "_", 8, 6, "_"],
+        2: ["_", 78, "_", "_", 78, 20, "_", 58, "_"],
+    }
+    card = Card("TestUser")
+    res = card.replace_if_exists(5)
+    assert res == True
+    res = card.replace_if_exists(7)
+    assert res == False

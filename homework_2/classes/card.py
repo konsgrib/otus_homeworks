@@ -39,19 +39,8 @@ class Card:
                     self.fields[i][x] = "-"
                     print(f"Bingo! number {value} exists!")
                     return True
-        print(f"Woops! The number {value} does not exists!")
+        print(f"Whops! The number {value} does not exists!")
         return False
 
     def __str__(self):
         return self._build_str()
-
-
-def main():
-    card = Card("Vasily Pupkin")
-    print(card)
-    card.replace_if_exists(10)
-    print(card)
-
-
-if __name__ == "__main__":
-    main()
