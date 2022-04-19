@@ -44,6 +44,7 @@ def play():
     i = 0
     j = 1
     while j < len(barrels):
+        print(f"size:{len(barrels)}, j: {j}")
         user = users[i]
         bar = barrels[j]
         # User move
@@ -65,12 +66,7 @@ def play():
             # Robot type of user will always choose the right step
             # To do this he'll use a Barrel.check_if_exists methog first
             # added just to do some visible delay between robot's steps
-            if user.card.check_if_exists(bar.number):
-                user.move(bar, user.card)
-                barrels.pop(j)
-                print("Lucky me!")
-            else:
-                print("Skipping!")
+            user.move(bar, user.card)
             sleep(2)
         # Choose next user
         i += 1
