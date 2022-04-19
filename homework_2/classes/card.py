@@ -38,8 +38,17 @@ class Card:
                 if self.fields[i][x] == value:
                     self.fields[i][x] = "-"
                     print(f"Bingo! number {value} exists!")
+                    if self.fields[i].count("\t") == 9:
+                        print(f"You are the winner!!!")
                     return True
         print(f"Whops! The number {value} does not exists!")
+        return False
+
+    def check_if_exists(self, value) -> bool:
+        for i in self.fields:
+            for x in range(len(self.fields[i])):
+                if self.fields[i][x] == value:
+                    return True
         return False
 
     def __str__(self):
