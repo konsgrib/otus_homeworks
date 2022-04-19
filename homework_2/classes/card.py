@@ -1,4 +1,4 @@
-from random import randint, sample
+from random import randint, sample, shuffle
 
 
 class Card:
@@ -8,10 +8,11 @@ class Card:
 
     def generate_fields(self):
         field = {}
-
+        rands = [i for i in range(1, 91)]
+        shuffle(rands)
         for x in range(3):
             items = sample(range(9), 5)
-            line = sorted([randint(1, 90) for _ in range(9)])
+            line = sorted([randint(1, 91) for _ in range(9)])
             new_line = []
             for i in range(9):
                 if i in items:
@@ -37,11 +38,12 @@ class Card:
             for x in range(len(self.fields[i])):
                 if self.fields[i][x] == value:
                     self.fields[i][x] = "-"
-                    print(f"Bingo! number {value} exists!")
-                    if self.fields[i].count("\t") == 9:
-                        print(f"You are the winner!!!")
+                    print(f"Number {value} exists at y: {i}, x: {x}!")
+                    if self.fields[i].count("-") == 5:
+                        print(f"********The winner is: {self.username}!!!*********")
+                        exit()
                     return True
-        print(f"Whops! The number {value} does not exists!")
+        # print(f"Whops! The number {value} does not exists!")
         return False
 
     def check_if_exists(self, value) -> bool:

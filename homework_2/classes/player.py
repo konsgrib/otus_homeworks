@@ -5,25 +5,14 @@ from card import Card
 class GenericPlayer:
     def __init__(self, name):
         self.name = name
-        self._games_won = 0
-        self._total_played = 0
+        self.card = None
+        self.greeting()
 
-    def win(self):
-        self._games_won += 1
-
-    def play(self):
-        self._total_played += 1
-
-    @property
-    def games_won(self):
-        return self._games_won
-
-    @property
-    def total_played(self):
-        return self._total_played
+    def greeting(self):
+        pass
 
     def __str__(self) -> str:
-        return f"{self.name} total played: {self.total_played}, total won: {self.games_won}"
+        return f"{self.name}"
 
 
 class MachinePlayer(GenericPlayer):
@@ -33,7 +22,13 @@ class MachinePlayer(GenericPlayer):
         print("I am not going to make a bet here!!!")
         return False
 
+    def greeting(self):
+        print(f"hello, I am a robot!")
+
 
 class MeatBag(GenericPlayer):
     def move(self, barrel: Barrel, card: Card):
         return card.replace_if_exists(barrel.number)
+
+    def greeting(self):
+        print(f"hello, I am a meat bag!")
