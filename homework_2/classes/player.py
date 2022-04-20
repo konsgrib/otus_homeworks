@@ -1,5 +1,5 @@
-from barrel import Barrel
-from card import Card
+from .barrel import Barrel
+from .card import Card
 
 
 class GenericPlayer:
@@ -24,7 +24,7 @@ class MachinePlayer(GenericPlayer):
         return False
 
     def greeting(self):
-        print(f"hello, I am a robot!")
+        return "hello, I am a robot!"
 
 
 class MeatBag(GenericPlayer):
@@ -32,4 +32,4 @@ class MeatBag(GenericPlayer):
         return card.replace_if_exists(barrel.number)
 
     def greeting(self):
-        print(f"hello, I am a meat bag!")
+        return "hello, I am a meat bag!"

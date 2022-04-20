@@ -39,11 +39,12 @@ class Card:
                 if self.fields[i][x] == value:
                     self.fields[i][x] = "-"
                     print(f"Number {value} exists at y: {i}, x: {x}!")
-                    if self.fields[i].count("-") == 5:
+                    if (
+                        self.fields[i].count("-") == 5
+                    ):  # Game over if user has crossed out one line
                         print(f"********The winner is: {self.username}!!!*********")
                         exit()
                     return True
-        # print(f"Whops! The number {value} does not exists!")
         return False
 
     def check_if_exists(self, value) -> bool:
