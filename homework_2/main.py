@@ -44,7 +44,7 @@ def play():
     i = 0
     j = 1
     while j < len(barrels):
-        print(f"size:{len(barrels)}, j: {j}")
+
         user = users[i]
         bar = barrels[j]
         # User move
