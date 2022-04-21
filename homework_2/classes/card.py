@@ -20,7 +20,7 @@ class Card:
             line = sorted(line)
             for i in range(len(line)):
                 if i not in items:
-                    line[i] = "-"
+                    line[i] = " "
             field[x] = line
         return field
 
