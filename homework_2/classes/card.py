@@ -13,11 +13,14 @@ class Card:
         for x in range(3):
             line = []
             items = sample(range(9), 5)
+
             for i in range(9):
+                line.append(rands.pop())
+
+            line = sorted(line)
+            for i in range(len(line)):
                 if i in items:
-                    line.append(rands.pop())
-                else:
-                    line.append(" ")
+                    line[i] = " "
             field[x] = line
         return field
 
