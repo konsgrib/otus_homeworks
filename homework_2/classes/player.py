@@ -1,3 +1,4 @@
+from time import sleep
 from .barrel import Barrel
 from .card import Card
 
@@ -18,8 +19,10 @@ class GenericPlayer:
 class MachinePlayer(GenericPlayer):
     def move(self, barrel: Barrel, card: Card):
         if card.check_if_exists(barrel.number):
+            sleep(1)
             print("Yeah, lucky me!")
             return card.replace_if_exists(barrel.number)
+        sleep(1)
         print("I am not going to make a bet here!!!")
         return False
 

@@ -67,7 +67,7 @@ def play():
             # To do this he'll use a Barrel.check_if_exists methog first
             # added just to do some visible delay between robot's steps
             user.move(bar, user.card)
-            sleep(2)
+            sleep(1)
         # Choose next user
         i += 1
         j += 1
