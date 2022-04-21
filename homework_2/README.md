@@ -39,6 +39,18 @@
 - Запустите main.py в терминале командой python main.py
 - Программа попросит ввести имя участника и выбрать его тип (human or robot)
 - Чтобы игра началась, вместо имени следующего игрока следует просто нажать "Ввод"
+- Чтобы посмотреть игру роботов, достаточно создать два или более игрока не человека и начать игру просто нажев "Enter" не вводя имени следующего игрока.
+
+Пример создания игры для двух роботов:
+```python
+(venv) PS C:\Users\konst\Projects\OTUS\otus_homeworks\homework_2> python .\main.py
+Input Player name or hit Enter to start the game: Verter
+Is player human? y/n [Y] n
+Input Player name or hit Enter to start the game: Bender
+Is player human? y/n [Y] n
+Input Player name or hit Enter to start the game:
+```
+
 
 
 
