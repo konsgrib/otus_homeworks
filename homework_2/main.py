@@ -9,7 +9,7 @@ from classes.player import MachinePlayer, MeatBag
 # generating pool of barrels
 def pool_of_barrels() -> list:
     pool = {}
-    rands = [i for i in range(0, 91)]
+    rands = [i for i in range(1, 91)]
     shuffle(rands)
     for i in range(1, len(rands)):
         barrel = Barrel()
