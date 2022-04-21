@@ -19,8 +19,8 @@ class Card:
 
             line = sorted(line)
             for i in range(len(line)):
-                if i in items:
-                    line[i] = " "
+                if i not in items:
+                    line[i] = "-"
             field[x] = line
         return field
 
