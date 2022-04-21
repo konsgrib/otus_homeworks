@@ -12,12 +12,14 @@ from sqlalchemy.orm import (
 
 import models
 import user_crud
+import article_crud
 from utils import check_password
+from make_db import fill_database
 
 DB_NAME = "blog_test.db"
 DB_URL = f"sqlite:///{DB_NAME}"
 DB_ECHO = True
-email = "test@email.com"
+email = "test.user2@test.com"
 password = "TestPassword123"
 new_password = "NewPassword121"
 fields = {"password": new_password, "is_active": False}
@@ -33,6 +35,7 @@ def connection():
 def db_setup(connection):
     models.Base.metadata.bind = connection
     models.Base.metadata.create_all()
+
     yield
     print("DELETING TABLES...")
     models.Base.metadata.drop_all()
@@ -71,3 +74,20 @@ def test_delete_user(db_session):
     user_crud.create_user(db_session, email, password)
     res = user_crud.delete_user(db_session, email)
     assert res == True
+
+
+# Article unit tests
+
+
+def test_get_article_by_id(db_session):
+    fill_database(db_session)
+    article = article_crud.get_article_by_id(db_session, 1)
+    print(article)
+    assert isinstance(article, models.Article)
+
+
+def test_get_article_by_user(db_session):
+    fill_database(db_session)
+    user = user_crud.get_user(db_session, email)
+    articles = article_crud.get_articles_by_user(db_session, user)
+    assert len(articles) == 7

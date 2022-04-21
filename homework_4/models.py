@@ -18,7 +18,7 @@ class User(Base):
 
     id = Column(Integer, primary_key=True)
     email = Column(String(100), unique=True)
-    password = Column(String(200), unique=True)
+    password = Column(String(200))
     is_active = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
     articles = relationship("Article", backref="user")
