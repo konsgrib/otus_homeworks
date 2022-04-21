@@ -40,7 +40,10 @@ def virtual_player_instance() -> MachinePlayer:
 
 class TestMeatBag:
     def test_greeting(self, player_instance):
-        assert player_instance.greeting() == "hello, I am a meat bag!"
+        assert (
+            player_instance.greeting()
+            == f"{player_instance.name}: Hello, I am a meat bag!"
+        )
 
     def test_move(self, player_instance, test_barrel_instance, barrel_instance):
         assert player_instance.move(barrel_instance, test_barrel_instance) == True
@@ -48,7 +51,10 @@ class TestMeatBag:
 
 class TestMachinePlayer:
     def test_virt_greeting(self, virtual_player_instance):
-        assert virtual_player_instance.greeting() == "hello, I am a robot!"
+        assert (
+            virtual_player_instance.greeting()
+            == f"{virtual_player_instance.name}: Hello, I am a robot!"
+        )
 
     def test_virt_move(
         self, virtual_player_instance, test_barrel_instance, barrel_instance

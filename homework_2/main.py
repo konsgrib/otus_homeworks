@@ -30,6 +30,7 @@ def create_users_and_cards():
             player = MeatBag(username)
         else:
             player = MachinePlayer(username)
+        print(player.greeting())
         # Generating and assigning a card for each new user.
         card = Card(player.name)
         card.generate_fields()
@@ -51,7 +52,7 @@ def play():
         print(user.card)
         print(bar)
         if isinstance(user, MeatBag):
-            move = input("Cross out number? y/n: [Y]") or "y"
+            move = input("Cross out number? y/n: [Y] ") or "y"
             if (move == "y" and user.move(bar, user.card)) or (
                 move == "n" and not user.move(bar, user.card)
             ):
@@ -62,6 +63,9 @@ def play():
             else:
                 print(f"User, {user.name} lose!!!")
                 users.pop(i)
+                if len(users) == 1:
+                    print(f"*****User: {users[0]} is a winner!!!*****")
+                    exit()
         else:
             # Robot type of user will always choose the right step
             # To do this he'll use a Barrel.check_if_exists methog first
