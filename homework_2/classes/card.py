@@ -11,15 +11,14 @@ class Card:
         rands = [i for i in range(1, 91)]
         shuffle(rands)
         for x in range(3):
+            line = []
             items = sample(range(9), 5)
-            line = sorted([randint(1, 91) for _ in range(9)])
-            new_line = []
             for i in range(9):
                 if i in items:
-                    new_line.append(line[i])
+                    line.append(rands.pop())
                 else:
-                    new_line.append(" ")
-            field[x] = new_line
+                    line.append(" ")
+            field[x] = line
         return field
 
     def _build_str(self):
