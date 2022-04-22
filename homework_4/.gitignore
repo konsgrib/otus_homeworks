@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 user.cpython-39.pyc
-
+.vscode/
 # C extensions
 *.so
 
