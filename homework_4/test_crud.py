@@ -4,15 +4,14 @@ import pytest
 from sqlalchemy import create_engine
 
 from sqlalchemy.orm import (
-    declarative_base,
     sessionmaker,
     scoped_session,
-    Session as SessionType,
 )
 
 import models
 import user_crud
 import article_crud
+import comment_crud
 from utils import check_password
 from make_db import fill_database
 
@@ -23,6 +22,7 @@ email = "test.user2@test.com"
 password = "TestPassword123"
 new_password = "NewPassword121"
 fields = {"password": new_password, "is_active": False}
+text = "Test comment text"
 
 
 @pytest.fixture
@@ -89,5 +89,30 @@ def test_get_article_by_id(db_session):
 def test_get_article_by_user(db_session):
     fill_database(db_session)
     user = user_crud.get_user(db_session, email)
+    print("***********************", user, "***********************")
     articles = article_crud.get_articles_by_user(db_session, user)
+    # 7 is an amount of articles set in the fill_database for user with id 2
     assert len(articles) == 7
+
+
+def test_create_comment(db_session):
+    fill_database(db_session)
+    user = user_crud.get_user(db_session, email)
+    print(user, "===============================", email)
+    article = article_crud.get_article_by_id(db_session, 1)
+    comment = comment_crud.create_comment(db_session, text, article, user)
+    assert isinstance(comment, models.Comment)
+
+
+def test_get_comments_by_user(db_session):
+    fill_database(db_session)
+    user = user_crud.get_user(db_session, email)
+    articles = comment_crud.get_comments_by_user(db_session, user)
+    assert len(articles) == 4
+
+
+def test_get_user_articles_comments(db_session):
+    fill_database(db_session)
+    user = user_crud.get_user(db_session, email)
+    data = user_crud.get_user_articles_comments(db_session, email)
+    assert len(data) == 3

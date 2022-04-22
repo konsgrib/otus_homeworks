@@ -40,9 +40,27 @@ class Article(Base):
     text = Column(String)
     visible = Column(Boolean, default=True, nullable=False)
     user_id = Column(Integer, ForeignKey("user.id"))
+    created_at = Column(DateTime, default=datetime.utcnow)
+    comments = relationship("Comment", backref="article")
 
     def __str__(self):
         return f"title: {self.title}, text={self.text},  created by: {self.user_id}"
+
+    def __repr__(self) -> str:
+        return str(self)
+
+
+class Comment(Base):
+    __tablename__ = "comment"
+
+    id = Column(Integer, primary_key=True)
+    text = Column(String(300))
+    user_id = Column(Integer, ForeignKey("user.id"))
+    article_id = Column(Integer, ForeignKey("article.id"))
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    def __str__(self):
+        return f"title:  text={self.text},  created by: {self.user_id} created at: {self.created_at}"
 
     def __repr__(self) -> str:
         return str(self)

@@ -1,4 +1,4 @@
-from models import User, Article
+from models import User, Article, Comment
 from database import get_session, Base
 
 
@@ -24,12 +24,25 @@ def fill_database(db_session):
         {"title": "Article Number 11", "text": "Some text goes here", "user_id": 3},
     ]
 
+    comments = [
+        {"text": "Very good point, I like it!!!", "user_id": 2, "article_id": 1},
+        {"text": "Very good point, I like it!!!", "user_id": 2, "article_id": 1},
+        {"text": "Very good point, I like it!!!", "user_id": 2, "article_id": 1},
+        {"text": "Very good point, I like it!!!", "user_id": 2, "article_id": 1},
+        {"text": "Very good point, I like it!!!", "user_id": 3, "article_id": 5},
+        {"text": "Very good point, I like it!!!", "user_id": 1, "article_id": 5},
+        {"text": "Very good point, I like it!!!", "user_id": 1, "article_id": 5},
+    ]
+
     for user in users:
         new_user = User(**user)
         db_session.add(new_user)
     for article in articles:
         new_article = Article(**article)
         db_session.add(new_article)
+    for comment in comments:
+        new_comment = Comment(**comment)
+        db_session.add(new_comment)
     db_session.commit()
 
 

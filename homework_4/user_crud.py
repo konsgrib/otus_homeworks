@@ -1,5 +1,5 @@
 from database import Base, Session, SessionType
-from models import User, Article
+from models import User, Article, Comment
 
 from utils import hash_password
 
@@ -44,3 +44,15 @@ def delete_user(session: SessionType, email: str) -> bool:
     except Exception as e:
         print("Failed to delete user", str(e))
         return False
+
+
+def get_user_articles_comments(session: SessionType, email: str):
+    data = (
+        session.query(User, Article, Comment)
+        .filter_by(email=email)
+        .filter(User.id == Article.user_id)
+        .filter(Article.id == Comment.article_id)
+        .all()
+    )
+    print(data)
+    return data

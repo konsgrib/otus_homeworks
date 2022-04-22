@@ -1,11 +1,10 @@
-from turtle import title
 from database import Base, Session, SessionType
 from models import User, Article
 
 
 def create_article(session: SessionType, title: str, text: str, user: User):
     article = Article(title=title, text=text, user_id=user.id)
-    print("create user", article)
+    print("create article", article)
     session.add(article)
     session.commit()
     print("saved ", article)
