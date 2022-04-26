@@ -44,9 +44,18 @@
   <div class="container">
     <div class="row">
       <div class="col-3">
-        <ul class="list-unstyled mb-0 py-3 pt-md-1">
-          <li>Авторы</li>
-          <li>Топ 5 постов</li>
+        <ul class="list-unstyled mb-0 py-3 pt-md-1" id="authors">
+          <li>Authors
+            <ul id="list-authors">
+              <li>vasya.pupkin@gmail.com</li>
+              <li>john.doe@mail.ru</li>
+              <li>jane.smoke@gmail.com</li>
+              <li>bart.simpson@mail.ru</li>
+              <li>bender@gmail.com</li>
+              <li>kenny.mckormic@mail.ru</li>
+            </ul>
+          </li>
+          <li>Most popular</li>
         </ul>
       </div>
       <div class="col-9" id="card-holder">
@@ -118,6 +127,16 @@
       hp.appendChild(a)
       div2.appendChild(hp)
     }
+    function toggleAuthors() {
+      const li = document.getElementById('list-authors')
+      if (li.style.display == 'none') {
+        li.style.display = null
+      } else {
+        li.style.display = 'none'
+      }
+    }
+    const authors = document.getElementById('authors')
+    authors.addEventListener('click', toggleAuthors)
   </script>
   <!-- Option 2: Separate Popper and Bootstrap JS -->
   <!--
