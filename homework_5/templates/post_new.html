@@ -85,25 +85,12 @@
     </script>
 
   <script src="https://unpkg.com/tiny-editor/dist/bundle.js"></script>
+  <script src="../js/scripts.js"></script>
   <script>
-    function submitPost() {
-      let form = document.getElementById("new-post-form");
-      let textEditor = document.getElementById('text-editor')
-      form.submit()
-    }
-
-
-    function toggleAuthors() {
-      const li = document.getElementById('list-authors')
-      if (li.style.display == 'none') {
-        li.style.display = null
-      } else {
-        li.style.display = 'none'
-      }
-    }
     const authors = document.getElementById('authors')
     authors.addEventListener('click', toggleAuthors)
   </script>
+
   <!-- Option 2: Separate Popper and Bootstrap JS -->
   <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
