@@ -1,12 +1,13 @@
 
-function toggleAuthors() {
-  const li = document.getElementById('list-authors')
-  if (li.style.display == 'none') {
-    li.style.display = null
+function toggleItem(itemId) {
+  const item = document.getElementById(itemId)
+  if (item.style.display == 'none') {
+    item.style.display = null
   } else {
-    li.style.display = 'none'
+    item.style.display = 'none'
   }
 }
+
 
 function submitPost() {
   let form = document.getElementById("new-post-form");
@@ -14,14 +15,6 @@ function submitPost() {
   form.submit()
 }
 
-function toggleComment() {
-  const commentForm = document.getElementById('comment-form')
-  if (commentForm.style.display == 'none') {
-    commentForm.style.display = null
-  } else {
-    commentForm.style.display = 'none'
-  }
-}
 
 function addCommentToCommentList() {
   let commentTextArea = document.getElementById('comment-text')
@@ -36,5 +29,5 @@ function addCommentToCommentList() {
   li.appendChild(div1)
   div2.appendChild(document.createTextNode(commentTextArea.value))
   ul.appendChild(li)
-  toggleComment()
+  toggleItem('comment-form')
 }
