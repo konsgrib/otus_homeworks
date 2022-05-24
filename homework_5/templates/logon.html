@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <title>Logon form</title>
+</head>
+
+<body>
+  <div class="form-signin">
+    <form id="post-form" action="index.html">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="name@example.com" required />
+      </div>
+      <div id="pass_1" class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" required />
+      </div>
+      <div id="pass_2" class="mb-3">
+        <label for=" password2" class="form-label">Verify Password</label>
+        <input type="password" class="form-control" id="password2" />
+      </div>
+      <button type="button" class="btn btn-primary" id="btn_submit" onclick="comparePassword()">Submit</button>
+    </form>
+    <div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"></script>
+    <script>
+      function comparePassword() {
+        let p = document.getElementById('pass_2')
+        let button = document.getElementById('btn_submit')
+        let form = document.getElementById("post-form");
+        if (p.style.display != 'none') {
+          pass = document.getElementById('password');
+          pass2 = document.getElementById('password2');
+          if (pass.value != pass2.value) {
+            pass.classList.add("is-invalid")
+            pass2.classList.add("is-invalid")
+            alert('Password does not match')
+          } else {
+            form.submit();
+          }
+        } else {
+          form.submit();
+        }
+      }
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const action = urlParams.get('action')
+      let div_p_2 = document.getElementById('pass_2')
+      let input_p_2 = document.getElementById('password2')
+      if (action == 'logon') {
+        div_p_2.style.display = 'none'
+        input_p_2.removeAttribute('required');
+      } else {
+        input_p_2.setAttribute('required', '');
+      }
+    </script>
+</body>
+
+</html>
