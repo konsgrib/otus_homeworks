@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% from "macros/back_to_main.html" import back_to_main_page %}
+{% block title %}
+Article {{ article_id }}
+{% endblock %}
+
+{% block body %}
+<h1>Article {{ article_id }}</h1>
+<code>
+    {{ article_text.text }}
+</code>
+<br>
+{{ back_to_main_page() }}
+{% endblock %}
