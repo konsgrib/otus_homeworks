@@ -2,15 +2,15 @@
 
 {% from "macros/back_to_main.html" import back_to_main_page %}
 {% block title %}
-Article {{ article_id }}
+Article {{ article.id }}
 {% endblock %}
 
 {% block body %}
 <div class="col-9">
     <div class="card" style="height:max-content;">
         <div class="card-body">
-            <h5 class="card-title">{{ article_text.title }}</h5>
-            {{ article_text.text }}
+            <h5 class="card-title">{{ article.title }}</h5>
+            {{ article.text }}
             <ul id="commentList" class="list-unstyled mb-0 py-3 pt-md-1">
                 <li>
                     <div class="container add-comment-right">

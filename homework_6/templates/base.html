@@ -27,10 +27,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="./logon.html?action=logon">Logon</a>
+                            <a class="nav-link active" aria-current="page" href="./logon.html?action=logon">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="./logon.html?action=signon">Sign On</a>
+                            <a class="nav-link active" aria-current="page" href="./logon.html?action=signon">Sign up</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('articles_app.add') }}">New Post</a>
@@ -50,9 +50,9 @@
                     <li>
                         Authors
                     </li>
-                    {% for article_id, article_text in articles %}
+                    {% for article in articles %}
                     <li>
-                        <a href="{{ url_for('articles_app.details', article_id = article_id) }}">{{ article_text.author
+                        <a href="{{ url_for('articles_app.details', article_id = article.id) }}">{{ article.author
                             }}</a>
 
                     </li>

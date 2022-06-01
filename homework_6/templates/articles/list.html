@@ -5,18 +5,31 @@ Articles list
 {% endblock %}
 
 {% block body %}
-
 <div class="col-9" id="card-holder">
-    {% for article_id, article_text in articles %}
+    {% if articles %}
+    {% for article in articles %}
     <div class="card mt-3">
         <div class="card-body">
-            <h5 class="card-title">{{ article_text.title }}</h5>
-            {{ article_text.text }}
+            <h5 class="card-title">{{ article.title }}</h5>
+            {{ article.text[:200]+"..." }}
             <p>
-                <a href="{{ url_for('articles_app.details', article_id = article_id) }}">More</a>
+                <a href="{{ url_for('articles_app.details', article_id = article.id) }}">More</a>
             </p>
         </div>
     </div>
+    {% else %}
+    <li>
+        <em>
+            No items found
+        </em>
+    </li>
     {% endfor %}
+    {% else %}
+    <h2>
+        No items found
+    </h2>
+    {% endif %}
 </div>
+
+
 {% endblock %}

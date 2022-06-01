@@ -1,46 +1,26 @@
+import logging
 from flask import Blueprint, jsonify, render_template, request, url_for, redirect
+from psycopg2 import IntegrityError
 from werkzeug.exceptions import NotFound, BadRequest
+from models.articles import Article
+from models import db
+from views.forms.article import ArticleForm
 
-from views.forms.articles import ArticleForm
 
+log = logging.getLogger(__name__)
 articles_app = Blueprint("articles_app", __name__)
-
-
-ARTICLES = {
-    1: {
-        "author": "Bill",
-        "title": "The first Article",
-        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo massa nec tortor consectetur sollicitudin. Aliquam id ipsum consectetur, cursus justo vitae, imperdiet mauris. Nullam id ornare turpis. Duis pretium velit nec velit sagittis vulputate. In interdum feugiat tempor. Cras euismod sapien tortor, ac porttitor tellus elementum quis. Mauris et quam nec arcu ultrices iaculis. Integer id tincidunt purus, at semper lorem. Maecenas blandit diam et fringilla interdum. Aliquam non mattis purus. Curabitur et ornare velit. Etiam placerat eu eros ac maximus. Sed semper magna lectus, vel auctor diam malesuada nec. Integer faucibus viverra lacus ac accumsan. Maecenas elementum libero ac fringilla ullamcorper. Maecenas cursus ante in ligula sollicitudin pharetra. Etiam non imperdiet tellus. Nulla pretium tempor ipsum, et porta nibh luctus at. Praesent bibendum faucibus ante nec viverra. ",
-    },
-    2: {
-        "author": "John",
-        "title": "The second Article",
-        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo massa nec tortor consectetur sollicitudin. Aliquam id ipsum consectetur, cursus justo vitae, imperdiet mauris. Nullam id ornare turpis. Duis pretium velit nec velit sagittis vulputate. In interdum feugiat tempor. Cras euismod sapien tortor, ac porttitor tellus elementum quis. Mauris et quam nec arcu ultrices iaculis. Integer id tincidunt purus, at semper lorem. Maecenas blandit diam et fringilla interdum. Aliquam non mattis purus. Curabitur et ornare velit. Etiam placerat eu eros ac maximus. Sed semper magna lectus, vel auctor diam malesuada nec. Integer faucibus viverra lacus ac accumsan. Maecenas elementum libero ac fringilla ullamcorper. Maecenas cursus ante in ligula sollicitudin pharetra. Etiam non imperdiet tellus. Nulla pretium tempor ipsum, et porta nibh luctus at. Praesent bibendum faucibus ante nec viverra. ",
-    },
-    3: {
-        "author": "Alex",
-        "title": "The third Article",
-        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo massa nec tortor consectetur sollicitudin. Aliquam id ipsum consectetur, cursus justo vitae, imperdiet mauris. Nullam id ornare turpis. Duis pretium velit nec velit sagittis vulputate. In interdum feugiat tempor. Cras euismod sapien tortor, ac porttitor tellus elementum quis. Mauris et quam nec arcu ultrices iaculis. Integer id tincidunt purus, at semper lorem. Maecenas blandit diam et fringilla interdum. Aliquam non mattis purus. Curabitur et ornare velit. Etiam placerat eu eros ac maximus. Sed semper magna lectus, vel auctor diam malesuada nec. Integer faucibus viverra lacus ac accumsan. Maecenas elementum libero ac fringilla ullamcorper. Maecenas cursus ante in ligula sollicitudin pharetra. Etiam non imperdiet tellus. Nulla pretium tempor ipsum, et porta nibh luctus at. Praesent bibendum faucibus ante nec viverra. ",
-    },
-}
 
 
 @articles_app.get("/", endpoint="list")
 def list_articles():
-    return render_template("articles/list.html", articles=ARTICLES.items())
+    articles: list[Article] = Article.query.all()
+    return render_template("articles/list.html", articles=articles)
 
 
 @articles_app.get("/<int:article_id>/", endpoint="details")
 def get_article(article_id):
-    article_text = ARTICLES.get(article_id)
-    if article_text is None:
-        raise NotFound(f"Article with is {article_id} not found!")
-    return render_template(
-        "articles/details.html",
-        article_id=article_id,
-        article_text=article_text,
-        articles=ARTICLES.items(),
-    )
+    article: Article = Article.query.get_or_404(article_id)
+    return render_template("articles/details.html", article=article)
 
 
 @articles_app.route("/add/", methods=["GET", "POST"], endpoint="add")
@@ -52,7 +32,6 @@ def add_article():
             render_template(
                 "articles/add.html",
                 form=form,
-                articles=ARTICLES.items(),
             ),
             400,
         )
@@ -63,12 +42,20 @@ def add_article():
     article_title = form.data["article_title"]
     article_author_id = form.data["article_author_id"]
 
-    article_id = len(ARTICLES) + 1
-    ARTICLES[article_id] = {
-        "title": article_title,
-        "text": article_text,
-        "author": article_author_id,
-    }
+    article = Article(
+        author=article_author_id,
+        title=article_title,
+        text=article_text,
+    )
 
-    url_article = url_for("articles_app.details", article_id=article_id)
+    db.session.add(article)
+
+    try:
+        db.session.commit()
+    except:
+        log.exception("Couldn't add article")
+        db.session.rollback()
+        raise BadRequest("Could not save article")
+
+    url_article = url_for("articles_app.details", article_id=article.id)
     return redirect(url_article)

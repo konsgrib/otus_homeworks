@@ -1,31 +1,25 @@
-from flask import Flask, request
+from os import getenv
+from flask import Flask, render_template, request, current_app
 from views.articles import articles_app
-
+from flask_sqlalchemy import SQLAlchemy
+from models import db, Article
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 
-app.config.update(
-    ENV="development",
-    SECRET_KEY="safdtrryrthrbvcnghjk9iotfgjuy678hygbs",
-)
+CONFIG_NAME = getenv("CONFIG", "DevelopmentConfig")
+app.config.from_object(f"config.{CONFIG_NAME}")
+
 
 app.register_blueprint(articles_app, url_prefix="/articles")
+db.init_app(app)
+migrate = Migrate(app, db)
 
 
-@app.route("/", methods=["GET", "POST"])
-def hello_world():
-    return {"message": "Hello, world!", "method": request.method}
-
-
-@app.get("/hello/")
-def handle_hello():
-    name = request.args.get("name", "OTUS")
-    return {"name": name}
-
-
-@app.get("/hello/<name>/")
-def hello_name(name):
-    return {"smg": f"hello {name}"}
+@app.route("/", endpoint="list")
+def list_products():
+    articles: list[Article] = Article.query.all()
+    return render_template("articles/list.html", articles=articles)
 
 
 @app.get("/authors/<int:author_id>/")
