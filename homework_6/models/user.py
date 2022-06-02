@@ -17,4 +17,4 @@ class User(db.Model, UserMixin):
     articles = relationship("Article", back_populates="user")
 
     def __repr__(self):
-        return "<User %r>" % self.username
+        return "<User %r>" % self.login

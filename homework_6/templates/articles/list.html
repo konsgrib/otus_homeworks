@@ -13,21 +13,19 @@ Articles list
             <h5 class="card-title">{{ article.title }}</h5>
             {{ article.text[:200]+"..." }}
             <p>
-                <a href="{{ url_for('articles_app.details', article_id = article.id) }}">More</a>
+                <a href="{{ url_for('articles_app.details', article_id = article.id, users=users) }}">More</a>
             </p>
         </div>
     </div>
     {% else %}
-    <li>
-        <em>
-            No items found
-        </em>
-    </li>
+    <h1>
+        This Author hasn't created articles yet
+    </h1>
     {% endfor %}
     {% else %}
-    <h2>
-        No items found
-    </h2>
+    <h1>
+        There are no articles yet
+    </h1>
     {% endif %}
 </div>
 

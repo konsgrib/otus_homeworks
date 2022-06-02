@@ -1,21 +1,20 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, HiddenField, TextAreaField
 from wtforms.validators import DataRequired, Length
 
 
 class ArticleForm(FlaskForm):
-    article_text = StringField(
+    article_text = TextAreaField(
         label="Text",
-        name="article_text" "article-text",
+        name="article_text",
         validators=[DataRequired(), Length(min=5)],
     )
     article_title = StringField(
         label="Title",
-        name="article_title" "article-title",
+        name="article_title",
         validators=[DataRequired(), Length(min=5)],
     )
-    article_author_id = StringField(
-        label="Author id",
-        name="article_author_id" "article-author-id",
-        validators=[DataRequired(), Length(min=1)],
+    article_user_id = HiddenField(
+        name="article_user_id",
+        validators=[DataRequired()],
     )

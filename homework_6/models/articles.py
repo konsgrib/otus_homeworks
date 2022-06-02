@@ -12,7 +12,6 @@ from .database import db
 
 class Article(db.Model):
     id = Column(Integer, primary_key=True)
-    author = Column(Integer, nullable=False)
     title = Column(String(80), unique=True, nullable=False)
     text = Column(Text, nullable=False)
     user_id = Column(Integer, ForeignKey("user.id"))

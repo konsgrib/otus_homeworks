@@ -6,7 +6,7 @@ from models.user import User
 from models.articles import Article
 from models import db
 from views.forms.article import ArticleForm
-from flask_login import login_user, login_required
+from flask_login import login_user, login_required, current_user
 
 log = logging.getLogger(__name__)
 articles_app = Blueprint("articles_app", __name__)
@@ -14,6 +14,7 @@ articles_app = Blueprint("articles_app", __name__)
 
 @articles_app.get("/", endpoint="list")
 def list_articles():
+
     users: list[User] = User.query.all()
     user_id = request.args.get("user_id")
     if not user_id:
@@ -25,8 +26,9 @@ def list_articles():
 
 @articles_app.get("/<int:article_id>/", endpoint="details")
 def get_article(article_id):
+    users: list[User] = User.query.all()
     article: Article = Article.query.get_or_404(article_id)
-    return render_template("articles/details.html", article=article)
+    return render_template("articles/details.html", article=article, users=users)
 
 
 @articles_app.get("/<int:author_id>/")
@@ -40,18 +42,25 @@ def get_author_by_id(author_id):
 @login_required
 def add_article():
     form = ArticleForm()
-
+    form.article_user_id.data = current_user.id
+    users: list[User] = User.query.all()
     if request.method == "GET":
         return (
             render_template(
                 "articles/add.html",
                 form=form,
+                users=users,
+                user_id=current_user.id,
             ),
             400,
         )
 
     if not form.validate_on_submit():
-        return render_template("articles/add.html", form=form)
+        return render_template(
+            "articles/add.html",
+            form=form,
+            users=users,
+        )
     article_text = form.data["article_text"]
     article_title = form.data["article_title"]
     article_user_id = form.data["article_user_id"]
@@ -71,5 +80,5 @@ def add_article():
         db.session.rollback()
         raise BadRequest("Could not save article")
 
-    url_article = url_for("articles_app.details", article_id=article.id)
+    url_article = url_for("articles_app.details", article_id=article.id, users=users)
     return redirect(url_article)

@@ -64,6 +64,18 @@
                     {% endfor %}
                 </ul>
             </div>
+            {% block flashes %}
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul class="alert alert-danger col-md-3">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+            {% endblock %}
+
             {% block body %}
             Base body
             {% endblock %}
@@ -73,53 +85,7 @@
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
     <script src="/static/js/scripts.js"></script>
-    <script>
 
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const newText = urlParams.get('text')
-        if (newText) {
-            let cardHolder = document.getElementById('card-holder');
-            let div1 = document.createElement('div');
-            let div2 = document.createElement('div');
-            let h5 = document.createElement('h5');
-            let hp = document.createElement('p');
-            let a = document.createElement('a');
-            div1.className = "card mt-3";
-            div1.style.width = "100%";
-            div2.className = "card-body";
-            h5.className = "card-title";
-            a.className = "card-link";
-            a.title = "More";
-            let linkText = document.createTextNode("More");
-            a.appendChild(linkText);
-            a.href = "./post_view.html";
-            div1.appendChild(div2);
-            div1.appendChild(div2);
-            div2.appendChild(h5);
-            h5.appendChild(document.createTextNode('Title'))
-            div2.appendChild(document.createTextNode("Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus animi \
-      perferendis a, porro rerum hic quisquam dicta molestias nulla, voluptate nihil! Molestias minima deleniti laborum \
-      accusantium ? Officia ad aut optio... "))
-            cardHolder.appendChild(div1)
-            hp.appendChild(a)
-            div2.appendChild(hp)
-        }
-
-        const authors = document.getElementById('authors')
-        authors.addEventListener('click', function () { toggleItem('list-authors') }, false)
-
-    </script>
-    <script>
-
-        const hrefComment = document.getElementById('comment-href')
-        hrefComment.addEventListener('click', function () { toggleItem('comment-form') }, false)
-
-        const submitComment = document.getElementById('comment-submit')
-        submitComment.addEventListener('click', addCommentToCommentList)
-
-        authors.addEventListener('click', function () { toggleItem('list-authors') }, false)
-    </script>
 </body>
 
 </html>

@@ -11,23 +11,6 @@ Article {{ article.id }}
         <div class="card-body">
             <h5 class="card-title">{{ article.title }}</h5>
             {{ article.text }}
-            <ul id="commentList" class="list-unstyled mb-0 py-3 pt-md-1">
-                <li>
-                    <div class="container add-comment-right">
-                        <a href="#" id="comment-href" class="card-link">Comment</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="container" id="comment-form" style="display: none;">
-                        <div class="mb-3">
-                            <textarea class="form-control" id="comment-text" rows="3"></textarea>
-                        </div>
-                        <div class="mb-3  add-comment-right">
-                            <a id="comment-submit" href="#" class="card-link">Submit</a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
         </div>
     </div>
 </div>

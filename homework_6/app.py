@@ -8,15 +8,10 @@ from flask_migrate import Migrate
 from flask_login import LoginManager, logout_user
 
 # for user
+from views.forms.login import LoginForm
+from views.forms.register import RegisterForm
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, login_required
-from flask_login import UserMixin
-
-from sqlalchemy import (
-    Column,
-    Integer,
-    String,
-)
 
 # for user
 app = Flask(__name__)
@@ -34,48 +29,35 @@ login_manager.init_app(app)
 
 
 @app.route("/", endpoint="list")
-@login_required
+# @login_required
 def list_products():
+    users: list[User] = User.query.all()
     articles: list[Article] = Article.query.all()
-    return render_template("articles/list.html", articles=articles)
-
-
-# @app.get("/authors/<int:author_id>/")
-# def get_author_by_id(author_id):
-#     return {
-#         "author": author_id,
-#     }
-
-
-# @app.get("/authors/<int:author_id>/books/<int:book_id>")
-# def get_author_books_by_ids(author_id, book_id):
-#     return {
-#         "author": author_id,
-#         "book_id": book_id,
-#     }
+    return render_template("articles/list.html", articles=articles, users=users)
 
 
 @app.route("/login/", methods=["GET", "POST"], endpoint="login")
 def login():
-    login = request.form.get("login")
-    password = request.form.get("password")
+    form = LoginForm()
+    login = form.data["login"]
+    password = form.data["password"]
     if login and password:
         user = User.query.filter_by(login=login).first()
         if user and check_password_hash(user.password, password):
             login_user(user)
             return redirect("/")
         else:
-            flash("you are not authorized!!!")
-    else:
-        flash("you are not authorized!!!")
-        return render_template("user/login.html")
+            flash("Login failed")
+    return render_template("user/login.html", form=form)
 
 
 @app.route("/register/", methods=["GET", "POST"])
 def register():
+    form = RegisterForm()
+    login_form = LoginForm()
     login = request.form.get("login")
     password = request.form.get("password")
-    password2 = request.form.get("password2")
+    password2 = request.form.get("password_2")
 
     if request.method == "POST":
         if not (login or password or password2):
@@ -88,8 +70,8 @@ def register():
             db.session.add(new_user)
             db.session.commit()
 
-            return render_template(url_for("login"))
-    return render_template("user/register.html")
+            return redirect(url_for("login"))
+    return render_template("user/register.html", form=form)
 
 
 @app.route("/logout/", methods=["GET", "POST"])
@@ -99,19 +81,14 @@ def logout():
     return redirect(url_for("login"))
 
 
-# TODO moveUser class  to separate file
-# class User(db.Model, UserMixin):
-#     id = Column(Integer, primary_key=True)
-#     login = Column(String(100), unique=True, nullable=False)
-#     password = Column(String(255), unique=False, nullable=False)
-
-#     def __repr__(self):
-#         return "<User %r>" % self.username
-
-
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(id)
+
+
+@login_manager.unauthorized_handler
+def unauthorized_callback():
+    return redirect("/login?next=" + request.path)
 
 
 if __name__ == "__main__":

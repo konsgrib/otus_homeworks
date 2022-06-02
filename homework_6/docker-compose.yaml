@@ -16,7 +16,6 @@ services:
 
   pg:
     image: postgres
-    user: postgres
     environment:
       POSTGRES_DB: blog
       POSTGRES_USER: username
