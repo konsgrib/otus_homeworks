@@ -40,7 +40,7 @@ docker-compose build api
 ```
 Запуск осуществляется командой:
 ```
-docker-compose up api -d  
+docker-compose up -d api
 ```
 ## Начало работы
 При первом запуске приложения база данных и пустые таблицы будут созданы. 
