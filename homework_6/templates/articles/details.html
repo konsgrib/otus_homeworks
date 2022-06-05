@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% from "macros/back_to_main.html" import back_to_main_page %}
+{% block title %}
+Article {{ article.id }}
+{% endblock %}
+
+{% block body %}
+<div class="col-9">
+    <div class="card" style="height:max-content;">
+        <div class="card-body">
+            <h5 class="card-title">{{ article.title }}</h5>
+            {{ article.text }}
+        </div>
+    </div>
+</div>
+{% endblock %}

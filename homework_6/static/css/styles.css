@@ -1,0 +1,67 @@
+body {
+    background:whitesmoke;
+}
+
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    background:grey;
+    margin-top: 10%;
+    
+}
+
+
+
+
+.navbar{
+    background:grey;
+    }
+.nav-link , .navbar-brand{
+    color: #f4f4f4;
+    cursor: pointer;
+    }
+.nav-link{
+    margin-right: 1em !important;
+    }
+.nav-link:hover{
+    background: #f4f4f4;
+    color: #f97300;
+    }
+.navbar-collapse{
+    justify-content: flex-end;
+    }
+.navbar-toggler{
+    background:#fff !important;
+    }
+div.card-body>p {
+    text-align: right;
+}
+div.card-body>p>a{
+    color: grey;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.add-comment-right{
+    width: 100%;
+    text-align: right;
+    margin-bottom: 1rem;
+}
+div.add-comment-right>a{
+    color: grey;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.card-title {
+    color: grey;
+    font-weight: bold;
+}
+.container {
+    border: 0px solid red;
+    width: 100%;
+}
+

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% from "macros/back_to_main.html" import back_to_main_page %}
+{% block title %}
+New Article
+{% endblock %}
+
+{% block body %}
+<div class="col-9">
+    <div class="container">
+        <form method="post">
+
+            {{ form.hidden_tag() }}
+            {{ form.article_title.label(class="form-label")}}
+            {{ form.article_title(class="form-control")}}
+            {{ form.article_text.label(class="form-label")}}
+            {{ form.article_text(class="form-control")}}
+            {{ form.article_user_id(class="form-control")}}
+            {% if form.article_text.errors %}
+            <ul class="alert alert-danger errors">
+                {% for error in form.article_text.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <input type="submit" value="Save" class="btn btn-primary my-3">
+        </form>
+    </div>
+</div>
+{% endblock %}
