@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+{% block title %}
+Products
+{% endblock %}
+{% block content %}
+<h1>Products</h1>
+
+
+<table style="border:1px solid black;">
+    <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Active</th>
+        <th>Created</th>
+        <th>City</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for product in products %}
+    <tr>
+        <td>{{ product.id }}</td>
+        <td>{{ product.title }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.active }}</td>
+        <td>{{ product.created_at }}</td>
+        <td>{{ product.city.name }}</td>
+        <td>{{ product.type.title }}</td>
+        <td>{{ product.price }}</td>
+        <td><a href="{% url 'update-product' product.id %}">Edit</a></td>
+        <td><a href="{% url 'delete-product' product.id %}">Delete</a></td>
+        <td><a href="{% url 'product' product.id %}">View</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}
