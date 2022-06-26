@@ -3,6 +3,9 @@
 Система состоит из нескольких модулей
 - lessons
 - users
+- products
+
+
 
 ## products
     - Создание типов продуктов *
@@ -15,7 +18,6 @@
     - Создание ученических групп (классов)
     - Создание типов групп *
     
-
 ## users
     - Управление записями об учениках
     - Управление записями о клиентах
@@ -31,7 +33,7 @@
 
 ## Запуск приложения
     - Склонировать репозиторий
-    https://github.com/konsgrib/otus_homeworks/pull/6t 
+    https://github.com/konsgrib/otus_homeworks/pull/6
 
     - Устаноаить зависимости
 ```bash
@@ -43,7 +45,7 @@
 ```
     - Задать пароль суперпользователю admin
 ```bash
-    python manage.py createsuperuser admin
+    python manage.py changepassword admin
 ```
 
 ## Начало работы
