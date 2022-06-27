@@ -9,12 +9,12 @@ def products(request):
     context = {
         "products": products,
     }
-    return render(request, "lessons/products.html", context)
+    return render(request, "products/products.html", context)
 
 
 def product(request, pk):
     product = Product.objects.get(id=pk)
-    return render(request, "lessons/product.html", {"product": product})
+    return render(request, "products/product.html", {"product": product})
 
 
 def create_product(request):
@@ -27,7 +27,7 @@ def create_product(request):
             return redirect("products")
 
     context = {"form": form}
-    return render(request, "lessons/product_form.html", context)
+    return render(request, "products/product_form.html", context)
 
 
 def update_product(request, pk):
@@ -41,7 +41,7 @@ def update_product(request, pk):
             return redirect("products")
 
     context = {"form": form}
-    return render(request, "lessons/product_form.html", context)
+    return render(request, "products/product_form.html", context)
 
 
 def delete_product(request, pk):
@@ -50,4 +50,4 @@ def delete_product(request, pk):
         product.delete()
         return redirect("products")
     context = {"object": product}
-    return render(request, "lessons/delete_template.html", context)
+    return render(request, "delete_template.html", context)

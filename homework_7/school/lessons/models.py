@@ -32,15 +32,15 @@ class GroupType(models.Model):
 
 
 class Lesson(models.Model):
-    date = models.DateTimeField()
+    date_scheduled = models.DateTimeField()
     teacher = models.ForeignKey("users.Teacher", on_delete=models.CASCADE)
     group = models.ForeignKey("SchoolGroup", on_delete=models.CASCADE)
     student = models.ManyToManyField("users.Student", blank=True)
     topic = models.CharField(max_length=300)
-    date = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.date.strftime('%Y-%m-%d')}: {self.teacher.user.first_name}{self.teacher.user.last_name} - {self.group.title}"
+        return f"{self.id}: {self.date_scheduled.strftime('%Y-%m-%d')}: {self.teacher.user.first_name}{self.teacher.user.last_name} - {self.group.title} //{self.topic}//"
 
     class Meta:
-        ordering = ["date", "teacher"]
+        ordering = ["date_scheduled", "teacher"]

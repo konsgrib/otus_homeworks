@@ -1,5 +1,12 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<h1>Single Lesson template</h1>
+<h1>{{ product.topic }}</h1>
+<br>
+<p>
+    {{ lesson.date_scheduled|date:'Y-m-d' }}
+</p>
+<p>
+    {{ lesson.group.title }}
+</p>
 {% endblock content %}

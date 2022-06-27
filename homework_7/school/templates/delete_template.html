@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    {% if type == "product" %}
+    <a href="{% url 'products' %}"></a>
+    {% elif type == "lesson"%}
+    <a href="{% url 'lessons' %}"></a>
+    {% endif %}
+
+    <input type="button" value="Back">
+    </a>
+    <input type="submit" value="Confirm">
+</form>
+
+{% endblock %}

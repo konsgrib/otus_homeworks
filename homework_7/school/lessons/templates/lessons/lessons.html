@@ -1,21 +1,29 @@
 {% extends 'main.html' %}
-
+{% block title %}
+Lessons
+{% endblock %}
 {% block content %}
-<h1>Lessons template</h1>
-{% if number > 10 %}
-<p>Number is greater than 10</p>
-{% else %}
-<p>Number is less than 10</p>
-{% endif %}
+<h1>Lessons</h1>
 
-
-<p>
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-    type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-    remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-    Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
-    Lorem Ipsum.
-</p>
+<table class="table table-light">
+    <tr>
+        <th>Date</th>
+        <th>Group</th>
+        <th>Topic</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for lesson in lessons %}
+    <tr>
+        <td>{{ lesson.date_scheduled|date:'Y-m-d' }}</td>
+        <td>{{ lesson.group.title }}</td>
+        <td>{{ lesson.topic }}</td>
+        <td><a href="{% url 'update-lesson' lesson.id %}">Edit</a></td>
+        <td><a href="{% url 'delete-lesson' lesson.id %}">Delete</a></td>
+        <td><a href="{% url 'lesson' lesson.id %}">View</a></td>
+    </tr>
+    {% endfor %}
+</table>
 
 {% endblock content %}
