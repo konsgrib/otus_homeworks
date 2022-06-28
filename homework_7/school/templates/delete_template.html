@@ -11,10 +11,12 @@
         <a href="{% url 'lessons' %}">
             {% elif type == 'student' %}
             <a href="{% url 'students' %}">
-                {% endif %}
-                <input type="button" value="Back">
-            </a>
-            <input type="submit" value="Confirm">
+                {% elif type == 'group' %}
+                <a href="{% url 'groups' %}">
+                    {% endif %}
+                    <input type="button" value="Back">
+                </a>
+                <input type="submit" value="Confirm">
 </form>
 
 {% endblock %}

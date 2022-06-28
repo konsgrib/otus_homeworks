@@ -3,7 +3,37 @@
 {% block content %}
 <h1>{{ object.last_name }} {{ object.name }}</h1>
 <br>
-<p>
-    {{ object.ssn }}
-</p>
+<table class="table table-light">
+    <tbody>
+        <tr>
+            <td>SSN:</td>
+            <td>{{ object.ssn }} </td>
+        </tr>
+        <tr>
+            <td>Phone:</td>
+            <td>{{ object.phone }} </td>
+        </tr>
+        <tr>
+            <td>E-mail:</td>
+            <td>{{ object.email }} </td>
+        </tr>
+        {% if type == "customer" %}
+        <tr>
+            <td>Invoice:</td>
+            <td>{{ object.want_invoice }} </td>
+        </tr>
+        <tr>
+            <td colspan="2"><a href="{% url 'customers' %}">Back</a></td>
+        </tr>
+        {% elif type == "student" %}
+        <tr>
+            <td>Customer:</td>
+            <td>{{ object.customer }} </td>
+        </tr>
+        <tr>
+            <td colspan="2"><a href="{% url 'students' %}">Back</a></td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
 {% endblock content %}
