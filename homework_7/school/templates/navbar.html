@@ -9,8 +9,20 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'products' %}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'teachers' %}">Teachers</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Clients
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'customers' %}">Customers</a></li>
+                        <li><a class="dropdown-item" href="{% url 'create-customer' %}">New Customer</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'students' %}">Students</a></li>
+                        <li><a class="dropdown-item" href="{% url 'create-student' %}">New Student</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -19,7 +31,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{% url 'products' %}">Show all</a></li>
-                        <li><a class="dropdown-item" href="{% url 'create-product' %}">Create</a></li>
+                        <li><a class="dropdown-item" href="{% url 'create-product' %}">New</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -29,7 +41,17 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{% url 'lessons' %}">Show all</a></li>
-                        <li><a class="dropdown-item" href="{% url 'create-lesson' %}">Create</a></li>
+                        <li><a class="dropdown-item" href="{% url 'create-lesson' %}">New</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Groups
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'lessons' %}">Show all</a></li>
+                        <li><a class="dropdown-item" href="{% url 'create-lesson' %}">New</a></li>
                     </ul>
                 </li>
             </ul>

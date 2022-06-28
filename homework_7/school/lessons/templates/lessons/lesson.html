@@ -9,4 +9,14 @@
 <p>
     {{ lesson.group.title }}
 </p>
+<p>
+    {{ lesson.teacher.user.last_name }} {{ lesson.teacher.user.first_name }}
+</p>
+<p>
+    {{ lesson.student.count }}
+</p>
+<p>
+    {{ lesson.topic }}
+</p>
+<div><a href="{% url 'lessons' %}">Back</a></div>
 {% endblock content %}

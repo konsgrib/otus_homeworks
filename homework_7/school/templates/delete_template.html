@@ -6,14 +6,15 @@
     {% csrf_token %}
     <p>Are you sure you want to delete "{{ object }}"?</p>
     {% if type == "product" %}
-    <a href="{% url 'products' %}"></a>
-    {% elif type == "lesson"%}
-    <a href="{% url 'lessons' %}"></a>
-    {% endif %}
-
-    <input type="button" value="Back">
-    </a>
-    <input type="submit" value="Confirm">
+    <a href="{% url 'products' %}">
+        {% elif type == "lesson" %}
+        <a href="{% url 'lessons' %}">
+            {% elif type == 'student' %}
+            <a href="{% url 'students' %}">
+                {% endif %}
+                <input type="button" value="Back">
+            </a>
+            <input type="submit" value="Confirm">
 </form>
 
 {% endblock %}
