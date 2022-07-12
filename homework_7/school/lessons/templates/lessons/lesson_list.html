@@ -14,7 +14,7 @@ Lessons
         <th></th>
         <th></th>
     </tr>
-    {% for lesson in lessons %}
+    {% for lesson in lesson_list %}
     <tr>
         <td>{{ lesson.date_scheduled|date:'Y-m-d' }}</td>
         <td>{{ lesson.group.title }}</td>

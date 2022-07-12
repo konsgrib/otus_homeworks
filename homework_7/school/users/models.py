@@ -2,7 +2,7 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
-from lessons.models import Product
+from django.urls import reverse
 
 
 class BaseUser(models.Model):
@@ -25,6 +25,12 @@ class Teacher(BaseUser):
 class Customer(BaseUser):
     want_invoice = models.BooleanField(default=True)
 
+    def get_absolute_url(self):
+        return reverse("customer", kwargs={"pk": self.pk})
+
 
 class Student(BaseUser):
     bound_customer = models.ForeignKey("Customer", on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse("student", kwargs={"pk": self.pk})

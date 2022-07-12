@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<h1>{{ object.last_name }} {{ object.name }}</h1>
+<h1>{{ object.user.last_name }} {{ object.user.first_name }}</h1>
 <br>
 <table class="table table-light">
     <tbody>
@@ -17,7 +17,6 @@
             <td>E-mail:</td>
             <td>{{ object.email }} </td>
         </tr>
-        {% if type == "customer" %}
         <tr>
             <td>Invoice:</td>
             <td>{{ object.want_invoice }} </td>
@@ -25,15 +24,6 @@
         <tr>
             <td colspan="2"><a href="{% url 'customers' %}">Back</a></td>
         </tr>
-        {% elif type == "student" %}
-        <tr>
-            <td>Customer:</td>
-            <td>{{ object.customer }} </td>
-        </tr>
-        <tr>
-            <td colspan="2"><a href="{% url 'students' %}">Back</a></td>
-        </tr>
-        {% endif %}
     </tbody>
 </table>
 {% endblock content %}

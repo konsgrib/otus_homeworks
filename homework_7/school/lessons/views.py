@@ -3,113 +3,56 @@ from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from .forms import LessonForm, GroupForm
 
+
+from django.views.generic.detail import DetailView
+from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
 from .models import Lesson, SchoolGroup
 
 
-def lessons(request):
-    lessons = Lesson.objects.all()
-    context = {
-        "lessons": lessons,
-    }
-    return render(request, "lessons/lessons.html", context)
+class LessonListView(ListView):
+    model = Lesson
 
 
-def lesson(request, pk):
-    lesson = Lesson.objects.get(id=pk)
-    context = {"lesson": lesson}
-    return render(request, "lessons/lesson.html", context)
+class LessonDetailView(DetailView):
+    model = Lesson
 
 
-def create_lesson(request):
-    form = LessonForm()
-
-    if request.method == "POST":
-        form = LessonForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("lessons")
-    context = {"form": form}
-    return render(request, "lessons/lesson_form.html", context)
+class LessonCreateView(CreateView):
+    model = Lesson
+    fields = "__all__"
 
 
-def update_lesson(request, pk):
-    lesson = Lesson.objects.get(id=pk)
-    form = LessonForm(instance=lesson)
-
-    if request.method == "POST":
-        form = LessonForm(request.POST, instance=lesson)
-        if form.is_valid():
-            form.save()
-            return redirect("lessons")
-
-    context = {"form": form}
-    return render(request, "lessons/lesson_form.html", context)
+class LessonUpdateView(UpdateView):
+    model = Lesson
+    fields = "__all__"
 
 
-def delete_lesson(request, pk):
-    lesson = Lesson.objects.get(id=pk)
-    if request.method == "POST":
-        lesson.delete()
-        return redirect("lessons")
-    context = {"object": lesson, "type": "lesson"}
-    return render(request, "delete_template.html", context)
+class LessonDeleteView(DeleteView):
+    model = Lesson
+    success_url = reverse_lazy("lessons")
 
 
-def groups(request):
-    groups = SchoolGroup.objects.all()
-    context = {
-        "groups": groups,
-    }
-    return render(request, "groups/groups.html", context)
+class SchoolGroupListView(ListView):
+    model = SchoolGroup
 
 
-def get_group(request, pk):
-    group = SchoolGroup.objects.get(id=pk)
-    context = {"group": group}
-    return render(request, "groups/group.html", context)
+class SchoolGroupDetailView(DetailView):
+    model = SchoolGroup
 
 
-def create_group(request):
-    form = GroupForm()
-
-    if request.method == "POST":
-        form = GroupForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("groups")
-    context = {"form": form}
-    return render(request, "groups/group_form.html", context)
+class SchoolGroupCreateView(CreateView):
+    model = SchoolGroup
+    fields = "__all__"
 
 
-def update_group(request, pk):
-    group = SchoolGroup.objects.get(id=pk)
-    form = GroupForm(instance=group)
-
-    if request.method == "POST":
-        form = GroupForm(request.POST, instance=group)
-        if form.is_valid():
-            form.save()
-            return redirect("groups")
-
-    context = {"form": form}
-    return render(request, "groups/group_form.html", context)
+class SchoolGroupUpdateView(UpdateView):
+    model = SchoolGroup
+    fields = "__all__"
 
 
-def delete_group(request, pk):
-    group = SchoolGroup.objects.get(id=pk)
-    if request.method == "POST":
-        group.delete()
-        return redirect("groups")
-    context = {"object": group, "type": "group"}
-    return render(request, "delete_template.html", context)
-
-
-class AboutView(TemplateView):
-
-    template_name = "lessons/about.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["lessons"] = Lesson.objects.all()
-        print(context["lessons"])
-        return context
+class SchoolGroupDeleteView(DeleteView):
+    model = SchoolGroup
+    success_url = reverse_lazy("groups")

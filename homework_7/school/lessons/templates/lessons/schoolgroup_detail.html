@@ -7,24 +7,24 @@
     <tbody>
         <tr>
             <td>Group name:</td>
-            <td>{{ group.title }}</td>
+            <td>{{ schoolgroup.title }}</td>
         </tr>
         <tr>
             <td>Teacher:</td>
-            <td>{{ group.teacher.user.last_name }} {{ group.teacher.user.first_name }}</td>
+            <td>{{ schoolgroup.teacher.user.last_name }} {{ schoolgroup.teacher.user.first_name }}</td>
         </tr>
         <tr>
             <td>City:</td>
-            <td>{{ group.city}}
+            <td>{{ schoolgroup.city}}
             </td>
         </tr>
         <tr>
             <td>Lesson duration</td>
-            <td> {{ group.duration }}</td>
+            <td> {{ schoolgroup.duration }}</td>
         </tr>
         <tr>
             <td>Students count</td>
-            <td>{{ group.student.count }}</td>
+            <td>{{ schoolgroup.student.count }}</td>
         </tr>
         <tr>
             <td colspan="2"><a href="{% url 'groups' %}">Back</a></td>

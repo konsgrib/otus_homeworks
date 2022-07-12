@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class City(models.Model):
@@ -28,6 +29,9 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
     description = models.TextField(null=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse("product", kwargs={"pk": self.pk})
 
     def __str__(self):
         return f"{self.city.name}: {self.title}, {self.price}"

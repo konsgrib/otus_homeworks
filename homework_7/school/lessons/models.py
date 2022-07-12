@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 from products.models import (
     Product,
 )
@@ -15,6 +17,9 @@ class SchoolGroup(models.Model):
     product = models.ManyToManyField("products.Product", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
+
+    def get_absolute_url(self):
+        return reverse("get-group", kwargs={"pk": self.pk})
 
     def __str__(self):
         return f"{self.city}: {self.title}: {self.duration}"
@@ -35,6 +40,9 @@ class Lesson(models.Model):
     student = models.ManyToManyField("users.Student", blank=True)
     topic = models.CharField(max_length=300)
     date_created = models.DateTimeField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse("lesson", kwargs={"pk": self.pk})
 
     def __str__(self):
         return f"{self.id}: {self.date_scheduled.strftime('%Y-%m-%d')}: {self.teacher.user.first_name}{self.teacher.user.last_name} - {self.group.title} //{self.topic}//"
