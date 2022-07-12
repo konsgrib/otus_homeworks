@@ -17,7 +17,7 @@
     {% for object in objects %}
     <tr>
         <td>{{ object.id }}</td>
-        <td>{{ object.last_name }} {{ object.name }}</td>
+        <td>{{ object.user.last_name }} {{ object.user.first_name }}</td>
         <td>{{ object.ssn }}</td>
         <td>{{ object.phone }}</td>
         <td>{{ object.email }}</td>

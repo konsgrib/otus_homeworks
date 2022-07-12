@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
+from django.views.generic.base import TemplateView
 from .forms import LessonForm, GroupForm
 
 from .models import Lesson, SchoolGroup
@@ -102,3 +102,14 @@ def delete_group(request, pk):
         return redirect("groups")
     context = {"object": group, "type": "group"}
     return render(request, "delete_template.html", context)
+
+
+class AboutView(TemplateView):
+
+    template_name = "lessons/about.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["lessons"] = Lesson.objects.all()
+        print(context["lessons"])
+        return context
