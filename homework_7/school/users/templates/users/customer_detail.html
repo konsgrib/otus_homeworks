@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>{{ object.user.last_name }} {{ object.user.first_name }}</h1>
+<br>
+<table class="table table-light">
+    <tbody>
+        <tr>
+            <td>SSN:</td>
+            <td>{{ object.ssn }} </td>
+        </tr>
+        <tr>
+            <td>Phone:</td>
+            <td>{{ object.phone }} </td>
+        </tr>
+        <tr>
+            <td>E-mail:</td>
+            <td>{{ object.email }} </td>
+        </tr>
+        <tr>
+            <td>Invoice:</td>
+            <td>{{ object.want_invoice }} </td>
+        </tr>
+        <tr>
+            <td colspan="2"><a href="{% url 'customers' %}">Back</a></td>
+        </tr>
+    </tbody>
+</table>
+{% endblock content %}

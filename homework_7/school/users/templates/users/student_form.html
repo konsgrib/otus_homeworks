@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+{% block title %}
+Edit Student
+{% endblock title %}
+{% block content %}
+
+<h1>Student form</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <p>{{ student.user.first_name }} {{ student.user.last_name }}</p>
+    {{ form.as_p }}
+
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

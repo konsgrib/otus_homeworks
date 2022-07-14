@@ -1,53 +1,29 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.views.generic.detail import DetailView
+from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
 from .models import Product
-from .forms import ProductForm
 
 
-def products(request):
-    products = Product.objects.all()
-    context = {
-        "products": products,
-    }
-    return render(request, "lessons/products.html", context)
+class ProductDetailView(DetailView):
+    model = Product
 
 
-def product(request, pk):
-    product = Product.objects.get(id=pk)
-    return render(request, "lessons/product.html", {"product": product})
+class ProductListView(ListView):
+    model = Product
 
 
-def create_product(request):
-    form = ProductForm()
-
-    if request.method == "POST":
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("products")
-
-    context = {"form": form}
-    return render(request, "lessons/product_form.html", context)
+class ProductCreateView(CreateView):
+    model = Product
+    fields = "__all__"
 
 
-def update_product(request, pk):
-    product = Product.objects.get(id=pk)
-    form = ProductForm(instance=product)
-
-    if request.method == "POST":
-        form = ProductForm(request.POST, instance=product)
-        if form.is_valid():
-            form.save()
-            return redirect("products")
-
-    context = {"form": form}
-    return render(request, "lessons/product_form.html", context)
+class ProductUpdateView(UpdateView):
+    model = Product
+    fields = "__all__"
 
 
-def delete_product(request, pk):
-    product = Product.objects.get(id=pk)
-    if request.method == "POST":
-        product.delete()
-        return redirect("products")
-    context = {"object": product}
-    return render(request, "lessons/delete_template.html", context)
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy("products")

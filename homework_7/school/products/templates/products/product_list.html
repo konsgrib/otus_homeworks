@@ -1,12 +1,12 @@
 {% extends 'main.html' %}
 {% block title %}
-Products
+products
 {% endblock %}
 {% block content %}
-<h1>Products</h1>
+<h1>products</h1>
 
 
-<table style="border:1px solid black;">
+<table class="table table-light">
     <tr>
         <th>#</th>
         <th>Title</th>
@@ -17,8 +17,9 @@ Products
         <th>Price</th>
         <th></th>
         <th></th>
+        <th></th>
     </tr>
-    {% for product in products %}
+    {% for product in product_list %}
     <tr>
         <td>{{ product.id }}</td>
         <td>{{ product.title }}</td>

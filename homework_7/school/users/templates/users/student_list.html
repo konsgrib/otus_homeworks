@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% block title %}
+Students list
+{% endblock %}
+{% block content %}
+<h1>Students</h1>
+<table class="table table-light">
+    <tr>
+        <th>#</th>
+        <th>Student</th>
+        <th>SSN</th>
+        <th>Phone</th>
+        <th>E-mail</th>
+        <th colspan="3"></th>
+
+    </tr>
+    {% for object in student_list %}
+    <tr>
+        <td>{{ object.id }}</td>
+        <td>{{ object.last_name }} {{ object.first_name }}</td>
+        <td>{{ object.ssn }}</td>
+        <td>{{ object.phone }}</td>
+        <td>{{ object.email }}</td>
+
+
+        <td><a href="{% url 'update-student' object.id %}">Edit</a></td>
+        <td><a href="{% url 'delete-student' object.id %}">Delete</a></td>
+        <td><a href="{% url 'student' object.id %}">View</a></td>
+
+
+        {% endfor %}
+    </tr>
+
+
+</table>
+{% endblock %}

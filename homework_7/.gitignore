@@ -6,7 +6,7 @@ user.cpython-39.pyc
 .vscode/
 # C extensions
 *.so
-
+*.sqlite3
 # Distribution / packaging
 .Python
 build/
