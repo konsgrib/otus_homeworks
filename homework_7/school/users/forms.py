@@ -6,7 +6,8 @@ from .models import Student, Customer
 class StudentForm(ModelForm):
     class Meta:
         model = Student
-        fields = "__all__"
+        # fields = "__all__"
+        fields = ("first_name", "last_name")
 
 
 class CustomerForm(ModelForm):

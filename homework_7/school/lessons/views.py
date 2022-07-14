@@ -1,9 +1,3 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.views.generic.base import TemplateView
-from .forms import LessonForm, GroupForm
-
-
 from django.views.generic.detail import DetailView
 from django.views.generic import ListView
 from django.urls import reverse_lazy
