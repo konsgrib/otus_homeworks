@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -66,6 +67,9 @@ class Teacher(BaseUser):
     def get_absolute_url(self):
         return reverse("teacher", kwargs={"pk": self.pk})
 
+    class Meta:
+        verbose_name_plural = "Teachers"
+
 
 class Customer(BaseUser):
     want_invoice = models.BooleanField(default=True)
@@ -73,9 +77,15 @@ class Customer(BaseUser):
     def get_absolute_url(self):
         return reverse("customer", kwargs={"pk": self.pk})
 
+    class Meta:
+        verbose_name_plural = "Customers"
+
 
 class Student(BaseUser):
     bound_customer = models.ForeignKey("Customer", on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse("student", kwargs={"pk": self.pk})
+
+    class Meta:
+        verbose_name_plural = "Students"

@@ -14,6 +14,7 @@ from .forms import StudentForm, CustomerForm
 
 class StudentListView(ListView):
     model = Student
+    paginate_by = 10
 
 
 class StudentDetailView(DetailView):
