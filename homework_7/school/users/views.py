@@ -23,14 +23,12 @@ class StudentDetailView(DetailView):
 
 class StudentCreateView(CreateView):
     model = Student
-    # fields = "__all__"
     fields = (
         "first_name",
         "last_name",
         "email",
         "phone",
         "ssn",
-        # "password",
         "bound_customer",
     )
 
@@ -43,7 +41,6 @@ class StudentUpdateView(UpdateView):
         "email",
         "phone",
         "ssn",
-        # "password",
         "bound_customer",
     )
 
@@ -63,28 +60,24 @@ class CustomerDetailView(DetailView):
 
 class CustomerCreateView(CreateView):
     model = Customer
-    # fields = "__all__"
     fields = (
         "first_name",
         "last_name",
         "email",
         "phone",
         "ssn",
-        # "password",
         "want_invoice",
     )
 
 
 class CustomerUpdateView(UpdateView):
     model = Customer
-    # fields = "__all__"
     fields = (
         "first_name",
         "last_name",
         "email",
         "phone",
         "ssn",
-        # "password",
         "want_invoice",
     )
 

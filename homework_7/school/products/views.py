@@ -13,6 +13,11 @@ class ProductDetailView(DetailView):
 class ProductListView(ListView):
     model = Product
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.select_related("city", "type")
+        return qs
+
 
 class ProductCreateView(CreateView):
     model = Product
