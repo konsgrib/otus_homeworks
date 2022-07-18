@@ -9,6 +9,15 @@ from django.urls import reverse
 from django.contrib.auth.models import BaseUserManager
 
 
+class FeedbackMessage(models.Model):
+    email = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    message = models.CharField(max_length=300)
+
+    def __str__(self):
+        return f"{self.email}: {self.message}"
+
+
 class CustomAccountManager(BaseUserManager):
     def create_superuser(self, email, user_name, first_name, password, **other_fields):
 

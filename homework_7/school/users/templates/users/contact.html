@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Contact form</title>
+</head>
+
+<body>
+    <p>Please leave a message for us</p>
+    <form action="{% url 'contacts' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">send message</button>
+    </form>
+
+</body>
+
+</html>

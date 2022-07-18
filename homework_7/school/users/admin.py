@@ -4,22 +4,21 @@ from .models import (
     Teacher,
     Customer,
     Student,
+    FeedbackMessage,
 )
 
 from django.contrib.auth.admin import UserAdmin
 
 
 class BaseUserAdminConfig(UserAdmin):
-# define method thet will be visiblein the admin panel
-# lesson 18 0:55
+    # define method thet will be visiblein the admin panel
+    # lesson 18 0:55
     actions = ["say_hello"]
-# This method can do modifications on selected objects
-    def say_hello(self,request,queryset):
+    # This method can do modifications on selected objects
+    def say_hello(self, request, queryset):
         # print(queryset)
         for item in queryset:
             print(item)
-
-
 
     search_fields = (
         "email",
@@ -206,3 +205,4 @@ admin.site.register(
     Teacher,
     BaseUserAdminConfig,
 )
+admin.site.register(FeedbackMessage)

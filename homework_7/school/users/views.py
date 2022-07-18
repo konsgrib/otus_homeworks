@@ -5,42 +5,51 @@ import time
 from django.views.generic.detail import DetailView
 from django.views.generic import ListView
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 
 
-from .models import Customer, Student
-from .forms import StudentForm, CustomerForm
+from .models import Customer, Student, FeedbackMessage
+from .forms import StudentForm, CustomerForm, ContactForm, send_mail
 
 from .tasks import send_mail_task
 from school.celery import school_app
 
+
+class ContactEmailView(FormView):
+    template_name = "users/contact.html"
+    form_class = ContactForm
+
+    def form_valid(self, form):
+        form.reply_mail()
+        form.store_message_form()
+        form.send_mail()
+        msg = "Message sent!"
+        return HttpResponse(msg)
+
+
+
+
+
 def mailer(request):
     task_id = None
 
-    if request.method=="POST":
+    if request.method == "POST":
         print(time.time())
-        task = send_mail_task.delay("subject","test_test")
+        task = send_mail_task.delay("subject", "test_test")
         print(time.time())
         task_id = task.id
-    context = {"task_id":task_id}
+    context = {"task_id": task_id}
 
-    return render(request,"users/mail.html",context=context)
+    return render(request, "users/mail.html", context=context)
 
 
-def status_view(request, task_id):  
+def status_view(request, task_id):
     print(task_id)
     task = school_app.AsyncResult(task_id)
-    print(f'result: {task.result}')
-    context = {'task_id': task_id,
-               'status': task.status}
+    print(f"result: {task.result}")
+    context = {"task_id": task_id, "status": task.status}
 
-    return render(request, 'users/status.html', context=context)
-
-
-
-
-
-
+    return render(request, "users/status.html", context=context)
 
 
 class StudentListView(ListView):

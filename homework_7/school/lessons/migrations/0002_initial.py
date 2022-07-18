@@ -9,39 +9,47 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('users', '0001_initial'),
-        ('lessons', '0001_initial'),
+        ("users", "0001_initial"),
+        ("lessons", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='schoolgroup',
-            name='student',
-            field=models.ManyToManyField(blank=True, to='users.Student'),
+            model_name="schoolgroup",
+            name="student",
+            field=models.ManyToManyField(blank=True, to="users.Student"),
         ),
         migrations.AddField(
-            model_name='schoolgroup',
-            name='teacher',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='users.teacher'),
+            model_name="schoolgroup",
+            name="teacher",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="users.teacher"
+            ),
         ),
         migrations.AddField(
-            model_name='schoolgroup',
-            name='type',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='lessons.grouptype'),
+            model_name="schoolgroup",
+            name="type",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="lessons.grouptype"
+            ),
         ),
         migrations.AddField(
-            model_name='lesson',
-            name='group',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='lessons.schoolgroup'),
+            model_name="lesson",
+            name="group",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="lessons.schoolgroup"
+            ),
         ),
         migrations.AddField(
-            model_name='lesson',
-            name='student',
-            field=models.ManyToManyField(blank=True, to='users.Student'),
+            model_name="lesson",
+            name="student",
+            field=models.ManyToManyField(blank=True, to="users.Student"),
         ),
         migrations.AddField(
-            model_name='lesson',
-            name='teacher',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='users.teacher'),
+            model_name="lesson",
+            name="teacher",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="users.teacher"
+            ),
         ),
     ]

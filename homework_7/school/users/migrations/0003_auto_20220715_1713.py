@@ -6,20 +6,20 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0002_auto_20220713_1900'),
+        ("users", "0002_auto_20220713_1900"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='customer',
-            options={'verbose_name_plural': 'Customers'},
+            name="customer",
+            options={"verbose_name_plural": "Customers"},
         ),
         migrations.AlterModelOptions(
-            name='student',
-            options={'verbose_name_plural': 'Students'},
+            name="student",
+            options={"verbose_name_plural": "Students"},
         ),
         migrations.AlterModelOptions(
-            name='teacher',
-            options={'verbose_name_plural': 'Teachers'},
+            name="teacher",
+            options={"verbose_name_plural": "Teachers"},
         ),
     ]

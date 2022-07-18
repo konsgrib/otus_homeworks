@@ -47,7 +47,10 @@
 ```bash
     python manage.py changepassword admin
 ```
-
+Запустить celery
+```bash
+    celery -A school worker -c 1 --loglevel INFO
+```
 ## Начало работы
     - Перейти по адресу http://localhost:8000/admin
     - Ввести имя пользователя admin и парользаданный на предидущем шаге 
