@@ -11,7 +11,7 @@ SECRET_KEY = "django-insecure-6($es(uorz5&2*3!7dc+3%!0^lsxo%90g0(v(8higrn(+l_!18
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost","192.168.0.11"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost","dev.gribanov.net"]
 
 
 # Application definition
@@ -130,3 +130,10 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 AUTH_USER_MODEL = "users.BaseUser"
 INTERNAL_IPS = ["127.0.0.1", "localhost","192.168.0.11"]
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = "tmp/app-messages"
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+
+# CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+# CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"

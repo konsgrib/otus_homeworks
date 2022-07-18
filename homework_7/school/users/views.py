@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
+import time
 
 from django.views.generic.detail import DetailView
 from django.views.generic import ListView
@@ -10,6 +10,37 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from .models import Customer, Student
 from .forms import StudentForm, CustomerForm
+
+from .tasks import send_mail_task
+from school.celery import school_app
+
+def mailer(request):
+    task_id = None
+
+    if request.method=="POST":
+        print(time.time())
+        task = send_mail_task.delay("subject","test_test")
+        print(time.time())
+        task_id = task.id
+    context = {"task_id":task_id}
+
+    return render(request,"users/mail.html",context=context)
+
+
+def status_view(request, task_id):  
+    print(task_id)
+    task = school_app.AsyncResult(task_id)
+    print(f'result: {task.result}')
+    context = {'task_id': task_id,
+               'status': task.status}
+
+    return render(request, 'users/status.html', context=context)
+
+
+
+
+
+
 
 
 class StudentListView(ListView):
