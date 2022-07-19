@@ -22,7 +22,8 @@ class SchoolGroup(models.Model):
         return reverse("get-group", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return f"{self.city}: {self.title}: {self.duration}"
+        # return f"{self.city}: {self.title}: {self.duration}"
+        return f"{self.title}: {self.duration}"
 
 
 class GroupType(models.Model):
@@ -45,7 +46,7 @@ class Lesson(models.Model):
         return reverse("lesson", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return f"{self.id}: {self.date_scheduled.strftime('%Y-%m-%d')}: {self.teacher.user.first_name}{self.teacher.user.last_name} - {self.group.title} //{self.topic}//"
+        return f"{self.id}: {self.date_scheduled.strftime('%Y-%m-%d')}: {self.teacher.first_name}{self.teacher.last_name} - {self.group.title} //{self.topic}//"
 
     class Meta:
         ordering = ["date_scheduled", "teacher"]

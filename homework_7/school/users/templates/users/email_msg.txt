@@ -1,0 +1,5 @@
+Hi,
+User: {{name|safe}}
+has sent us a message:
+message: {{message|safe}}
+email: {{email|safe}}

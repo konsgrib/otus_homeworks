@@ -9,41 +9,70 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('products', '0001_initial'),
+        ("products", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='GroupType',
+            name="GroupType",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100)),
-                ('description', models.CharField(max_length=300)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=100)),
+                ("description", models.CharField(max_length=300)),
             ],
         ),
         migrations.CreateModel(
-            name='Lesson',
+            name="Lesson",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date_scheduled', models.DateTimeField()),
-                ('topic', models.CharField(max_length=300)),
-                ('date_created', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date_scheduled", models.DateTimeField()),
+                ("topic", models.CharField(max_length=300)),
+                ("date_created", models.DateTimeField(auto_now_add=True)),
             ],
             options={
-                'ordering': ['date_scheduled', 'teacher'],
+                "ordering": ["date_scheduled", "teacher"],
             },
         ),
         migrations.CreateModel(
-            name='SchoolGroup',
+            name="SchoolGroup",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100)),
-                ('duration', models.IntegerField()),
-                ('invoice_string', models.CharField(max_length=200)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('active', models.BooleanField(default=True)),
-                ('city', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.city')),
-                ('product', models.ManyToManyField(blank=True, to='products.Product')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=100)),
+                ("duration", models.IntegerField()),
+                ("invoice_string", models.CharField(max_length=200)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("active", models.BooleanField(default=True)),
+                (
+                    "city",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="products.city"
+                    ),
+                ),
+                ("product", models.ManyToManyField(blank=True, to="products.Product")),
             ],
         ),
     ]

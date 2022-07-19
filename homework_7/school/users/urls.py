@@ -11,6 +11,9 @@ from .views import (
     CustomerCreateView,
     CustomerUpdateView,
     CustomerDeleteView,
+    status_view,
+    mailer,
+    ContactEmailView,
 )
 
 urlpatterns = [
@@ -37,4 +40,7 @@ urlpatterns = [
         name="delete-customer",
     ),
     path("logon/", include("django.contrib.auth.urls")),
+    path("mail/", mailer),
+    path("status/<str:task_id>/", status_view, name="status_view"),
+    path("contacts/", ContactEmailView.as_view(), name="contacts"),
 ]

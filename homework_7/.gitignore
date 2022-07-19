@@ -4,6 +4,8 @@ __pycache__/
 *$py.class
 user.cpython-39.pyc
 .vscode/
+*.tmp
+*~$*.docx
 # C extensions
 *.so
 *.sqlite3

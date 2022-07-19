@@ -8,6 +8,12 @@ from .models import Lesson, SchoolGroup
 
 class LessonListView(ListView):
     model = Lesson
+    page_title = "lessons"
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.select_related("group", "teacher")
+        return qs
 
 
 class LessonDetailView(DetailView):
@@ -22,6 +28,11 @@ class LessonCreateView(CreateView):
 class LessonUpdateView(UpdateView):
     model = Lesson
     fields = "__all__"
+
+    # def get_queryset(self):
+    #     qs = super().get_queryset()
+    #     qs = qs.select_related("group")
+    #     return qs
 
 
 class LessonDeleteView(DeleteView):
